@@ -1,0 +1,6 @@
+com\hibernateannoconfig\model\Question.class
+com\hibernateannoconfig\model\Student.class
+com\hibernateannoconfig\main\HibernateAnnoConfig.class
+com\hibernateannoconfig\model\Laptop.class
+com\hibernateannoconfig\model\Answer.class
+com\hibernateannoconfig\main\QuestionMain.class
