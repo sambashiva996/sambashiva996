@@ -1,0 +1,6 @@
+com\springdemo\dao\LoginDaoImpl.class
+com\springdemo\dao\LoginDaoIntf.class
+com\springdemo\service\LoginServiceIntf.class
+com\springdemo\model\Login.class
+com\springdemo\service\LoginServiceImpl.class
+com\springdemo\controller\LoginController.class
