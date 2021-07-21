@@ -1,0 +1,8 @@
+com\springhibernatedemo\configuration\WebXmlConfiguration.class
+com\springhibernatedemo\dao\RegistrationDaoImpl.class
+com\springhibernatedemo\service\RegistrationServiceIntf.class
+com\springhibernatedemo\controller\RegistrationController.class
+com\springhibernatedemo\service\RegistrationServiceImpl.class
+com\springhibernatedemo\model\Registration.class
+com\springhibernatedemo\dao\RegistrationDaoIntf.class
+com\springhibernatedemo\configuration\DataBaseInternalResourceConfiguration.class
