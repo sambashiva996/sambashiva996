@@ -1,0 +1,155 @@
+[1:08 PM] G Revathi
+    
+Core Java
+--->Stand alone application
+--->Console Application
+--->Window application(applet,swing)
+--->Web Application(html,servlet,jsp)
+
+
+username--->revathi
+password--->revathi
+submit
+-------->  servlet--->jdbc-->    database
+
+
+
+getParemeter("usernmae")
+getParameter("password")
+
+
+public class Student
+{​​​​​​​
+
+
+Address address= new Address(1,"chennai");
+}​​​​​​​
+
+
+public class Address
+{​​​​​​​
+Address();
+}​​​​​​​
+
+
+
+Spring(frameworks of framewrok)
+------------
+fronend/backend Components
+validate field components
+db components
+Spring container
+----->IOC Container
+-------->Inversion of control container
+Dependency Injection
+loosely coupled
+class student
+{​​​​​​​
+Address address;
+}​​​​​​​
+Bean---->Object--->
+
+
+
+Java project 
+            spring-core.jar
+           Spring-web
+          Spring-Jdbc
+          Spring-orm
+         ApplicationContext
+
+
+Maven Project
+   ----->pom.xml
+    <project>'
+          <dependencies>
+               <dependency>
+                         <groupId>org.springframework</groupid>
+                         <artifactId>Spring-core</artifactId>
+                          <version>4.3.9.RELEASE</version>                         
+
+
+               <dependency> 
+               <dependency>
+                         <groupId>org.hibernate</groupid>
+                          <artifactId>hibenate-core</artifactId>
+                          <version>4.3.9.RELEASE</version>  
+                   
+               <dependency> 
+          </dependencies>
+     </project>
+
+
+mvn install
+
+
+c:\\users\\revathig\\.m2\\reposiotry\\
+
+
+org 
+    -->springfare
+        ---->spring-core
+               --->4.3.9
+                      ---->jar
+               --->5.3.4
+
+
+                      ---->jar
+
+
+interface
+-------------------
+ApplicationContext
+---->ClassPathXmlApplicationContext(Beans.xml)---->
+    SpringCoreDemo
+------------->src/main/java
+               ---->com.demo
+                    ---->Main
+                   ------>Employeee
+               Beans.xml
+---------->
+---->FileSystemXmlApplicationContext(c:\\revathi\\
+
+
+---->WebXmlApplicationContext
+BeanFactory
+---->XmlBeanFaactory
+
+
+Eager Loaded
+ApplicationContext context=new ClassPathXmlApplicationContext(Beans.xml);
+Lazy-init=true
+Employee
+Student
+Department
+
+
+Lazy Loaded
+Resource resource=new ClassPathResource("Beans.xml");
+BeanFactory factory=new XmlBeanFaactory(resource);
+
+
+Spring Life cycle
+-----------------
+init
+destroy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,104 @@
+[2:04 PM] G Revathi
+    
+com.carinventory.main
+public class CarInventorySystem
+{​​​​​​​
+main()
+{​​​​​​​
+ApplicationContext context=new ClassPthXmlApplicationContext("Beans.xml");
+CarDao dao=context.getBean("carDao");
+System.our.println("enter make");
+Scanner scanner=new Scanner(System.in);
+String carMake=scanner.nextLine();//next()---> Honda Civic
+Car car=new Car();
+car.setMake(carMake);
+dao.saveCar(car);
+List<Car> car=dao.fetchCarDetails();
+car.forEach(carInfo->sysout(carInfo));
+}​​​​​​​
+}​​​​​​​
+com.carinventory.dao
+CarDao
+-----------
+public class CarDao
+{​​​​​​​
+JdbcTemplate template;
+public void saveCar(Car car)
+{​​​​​​​
+String sql="insert into car values(car.getId,car.getMake,car.getModel,car.getPrice);
+template.update(sql);
+}​​​​​​​
+public List<Car> fetchCarDetails()
+{​​​​​​​
+
+
+List<Car> list=template.query("select * from car",new CarMapper<Car>);
+return list;
+}​​​​​​​
+
+
+}​​​​​​​
+public class CarMapper implements RowMapper<Car>
+{​​​​​​​
+public Car mapRow(ResultSet rs,int rownum)
+{​​​​​​​
+Car car=new Car();
+car.setId(rs.getInt("id"));
+car.setMake(rs.getString("make"));
+car.setModel(rs.getString("model"));
+car.setPrice(rs.getFloat("price"));
+return car;
+}​​​​​​​
+}​​​​​​​
+List<Car> car=new LinkedList<>();
+car.add(1 honda   jazz   34000);
+car.add(2 honda   civic  45000);
+car.add(3 hyundai  verna 200000);
+car.add(4 maruthi  swift 300000);
+return car;
+
+
+database
+----------
+id make   model  price
+1 honda   jazz   34000
+2 honda   civic  45000
+3 hyundai  verna 200000
+4 maruthi  swift 300000
+
+
+com.carinventory.model
+@Getter
+@Setter
+public class Car
+{​​​​​​​
+private int id;
+private String make;
+private String model;
+private float price;
+
+
+}​​​​​​​
+
+
+
+https://github.com/rutiksalunke472000/semo.git
+
+
+
+git init--->create git local repository
+git add-->Working dirtory to staging area
+git commit
+git commit -m "commit on 13-07-2021"
+git remote -v
+git remote add origin https://github.com/rutiksalunke472000/semo.git
+git push origin master
+
+
+
+
+
+
+
+
+

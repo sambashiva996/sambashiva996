@@ -1,0 +1,121 @@
+[1:32 PM] G Revathi
+    
+Spring Data Jpa
+-----------
+JpaRespository
+CrudRepository
+Pagingandsortingrepository
+
+
+
+Spring Boot with Spring Data Jpa
+-------------
+
+
+main
+---------
+Main Application
+remove-->
+    @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
+config--->remove
+controller
+------------
+@RestController=@controller+@responsebody
+public class RegistrationController
+{​​​​​​​
+@Autowired
+EmployeeServiceIntf service;
+@RequestMapping("saveEmployee")
+public String saveEmployee(@RequestBody Employee emp)
+{​​​​​​​
+service.saveEmployee(emp);
+return "saved successfully";
+}​​​​​​​
+@RequestMapping("fetchEmployees")
+
+
+public List<Employee> fetchEmployees()
+{​​​​​​​
+List<Employee> emp=service.fetchEmployees();
+return emp;//json 
+}​​​​​​​
+
+
+@RequestMapping("fetechByUserName/{​​​​​​​userName}​​​​​​​)
+public Employee fetchByUsername(@PathVariable("userName") String userName)
+{​​​​​​​
+Employee emp=service.fetchByName(userName);
+return emp;
+}​​​​​​​
+
+
+public interface EmployeeServiceIntf
+{​​​​​​​
+public void saveEmployee(Employee emp);
+public List<Employee> fetchEmployees();
+public Employee fetchByUsername(String userName);
+}​​​​​​​
+@Service
+public class ServiceImpl implements EmployeeServiceIntf
+{​​​​​​​
+@Autowired
+EmployeeRepository repo;
+
+
+public void saveEmployee(Employee emp)
+{​​​​​​​
+repo.save(emp);
+}​​​​​​​
+public List<Employee> fetchEmployees()
+{​​​​​​​
+repo.findAll();
+}​​​​​​​
+public Employee fetchByUsername(String userName)
+{​​​​​​​
+repo.findByName(userName);
+}​​​​​​​
+
+
+@Repository
+public interface EmployeeRespository extends JpaRespository<Employee,Integer>
+{​​​​​​​
+public Employee findByNameAndAge(String userName,int Age);
+findByEmployeeName
+findByName
+readByAge
+}​​​​​​​
+
+
+applicatiom.properties
+--------
+server.port=8555
+
+
+spring.datasource.url=jdbc:mysql://localhost:3307/dhanjyothi_db
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+
+
+spring.jpa.show-sql = true
+spring.jpa.hibernate.ddl-auto = update
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+
+
+model
+service
+dao
+
+
+
+
+
+
+
+
+
+
+
+
+

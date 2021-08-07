@@ -1,0 +1,38 @@
+---:::02/08/2021:::---
+----::::SpringBoot:::::----Validation:::----
+
+--->entiry             dto
+    User --->table 
+--->dto
+Userdto--->        
+anguler-->json(request and response)--->spring boot
+dto format-------------------------------------dto will be convereted entity--->database
+
+---->ExceptionHandling given by Spring--
+@controlleradvice--top of class(jsp)
+@restcontrolleradvice--top of class (postman or soapui or rest end pints)
+@exceptionhandler(method)
+
+@RestControlleradvice
+public class ExceptionHandling{
+
+@ResponseStatus(HttpStatus.BADRequest)
+@Exceptionhandler(MethodArgumentnotvalidexception.class)
+public Map<String,String> handlerArgumentnotvalidexception(MethodArgumentnotvalidexception ex){
+Map<String,String> errors=new HashMap<String,String>();
+
+return ex.getBindingResult.getFiedErrors().forEach(error->errors.put(error.getField,
+error.getdefaultmessage());
+}
+
+@ResponseStatus(HttpStatus.Internalservererror)
+@Exceptionhandler(Contraintviolationexception.class)
+public Map<String,String> handlerContraintviolationexception(Contraintviolationexceptio ex){
+
+Map<String,String> errors=new HashMap<String,String>();
+ex.getContraintviolations().forEach(error->errors.put(error.getmessage()
+,error.getPropertyPath);
+
+retunes errors;
+}
+}

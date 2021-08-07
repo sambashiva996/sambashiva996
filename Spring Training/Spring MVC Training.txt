@@ -1,0 +1,86 @@
+
+-------::::::SPRING MVC::::::---------
+--14/07/2021----
+
+--SpringMVC
+
+-Login page return type ModelAndView this is Jsp Page
+
+
+@RequestMapping("loadLoginPage")
+public ModelAndView loadLoginPage(){
+
+return new ModelAndView("Login");-->jsp page --login.jsp	
+}
+
+--->DispatcherServlet configure in web.xml
+
+-->frist reuest goto web.xml
+
+-----> first jsp creare along with webapp
+
+--web.xml and -servlet.xml in WEB-INF folder
+
+-->org.springframework.web.servlet.view.InernalResourceViewResolver
+
+pom.xml:
+
+bild tag
+   -pluginS TAG
+    -plugin tag
+       -groupid tag -org.apache.maven.plugins
+        -arifactid tag -
+          version tag -3.6.1
+          -configuration tag
+            -source tag
+               target tag-1.8
+
+
+::::::::::::14/07/2021::::::::::::::::
+
+-->Login.jsp
+
+--> name or path like same
+---------------
+<body>
+<form>
+</body>
+
+
+-->isELIgnored="false" mention in page directory in jsp 
+-Task::
+--> radio, check box,calender
+
+-------------
+
+-->validate fields
+   --by using annotation 
+   --by using validator interface
+
+--<mvc:annotaion-driven/>
+
+1.Javax.vali	dation and Hibernate validation depedency	
+
+--------------------------------------------------
+
+----Maven integration every ide i.e: http://download.eclipse.org/technology/m2e/releases/
+
+---><mvc:annotation-driven/> it is for Validation 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

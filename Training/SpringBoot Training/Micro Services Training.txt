@@ -1,0 +1,304 @@
+-----:::::::::::::29/03/2021:::::::::::::-----
+--Spring Boot MicroServices---
+------------------------------
+
+--->
+
+------AWS-------
+-----------------
+--->how to create free tier account in AWS?
+---> Aws In Java techie to learn aws deploymeny
+--------------------------------------
+--Spring Boot MicroServices---
+---------------------------
+
+--->Monlith Application
+
+product
+order
+payment
+invoice
+
+-draw backs--
+-----
+---> if get any problem with like order  entire application we can not use
+-scaling: - whether it is capable of 1000 of requests handle or not
+ and devops people replicate it or copy of application.and memory will create this is another problem
+
+--->in monolith everything module create in one application
+--->
+
+-Micro Service
+-------------
+--->we use defferent databases in micro services
+--->in monolith use only one db
+--->in monolith application every server we need to deploy application
+    so then memory increase 
+--->in Microservices we need to deploy only Particuler
+    jar or app like many we need to deploy
+--->Spring also provide Spring Cloud
+--->
+
+Service Registery an dicovery--
+-------------------
+1)Eureka Server--->way of config defferent but porpose is same
+2)Zoo Keeper server-->way of config defferent but porpose is same
+3)Consul server-->way of config defferent but porpose is same
+
+Service 1------------>service 2
+Customer----------------->product
+http://localhost:8990/product/productdetails // he changed to defferent ip addess
+   -->http://123.23..34.45:8764/product/productdetails   
+     --->then will get 404 error page to avoid that below 
+       --->service registery and discovry created as intermediate path
+        ---> eureka server is a intermedaite
+Eureka --javause site learn
+---------
+1)customer-service--->http://localhost:8001
+2)product-service--->http://localhost:8002
+3)cart-service--->http://localhost:8003
+
+http://product-serivce/product/productdetails
+http://localhost:8012/product/productdetails
+
+Ribbon
+-------
+Routing and load balancing
+
+Hystrix server
+----------------
+Circuit breaker
+falback
+
+Service 1------------>service 2
+Customer----------------->product
+http://product-serivce/product/productdetails
+
+falback method given by histrix--> is going to display message instead of showing error message
+
+---for microservices learn :https://www.javainuse.com/spring/spring_eurekaregister
+
+--->Histrix -->TechPrimers site learn
+
+Zuul --techprimers site learn
+-----
+request--->ZUUL(API gateway)--->eureka
+--->it will check authoried user or not if not it will blocl
+--->
+for-checking user
+Spring security
+JWT--->JSON Web Token---->Java techie site to learn
+OAUTH2
+API key
+Keyclock
+
+Turbine
+-------
+it will combine all endpoints show in one dashboard
+
+Config Server
+-------------
+
+ELK stack
+------------
+ELK-Elastic Logstash Kibana-->
+
+
+Rest Template and feign client
+-------------------------
+one microservice communicate with another microservice using fein client and rest template it is a old 
+
+--->
+---------------------------------------------------
+Tasks::microservices
+
+4 projects
+--------------
+Eureka(Spring_Cloud_Eureka):
+-----------------------------
+Main
+-------
+@SpringBootApplication
+@EnableEurekaServer
+public class SpringBootHelloWorldApplication {
+    public static void main(String[] args) throws RestClientException, IOException {
+         SpringApplication.run(
+                SpringBootHelloWorldApplication.class, args);
+        
+ }
+}
+----------
+application.properties
+---------
+server.port=8761
+eureka.client.registerWithEureka: false
+eureka.client.fetchRegistry: false
+
+---------------------------------
+
+
+Zuul(Spring_Cloud_Zuul):
+---------------------
+@EnableEurekaClient  or @EnableDiscoveryClient is common to all Eureka,ZoolKeeper,Consul  
+@EnableZuulProxy
+@SpringBootApplication
+public class ZuulServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ZuulServiceApplication.class, args);
+    }
+}
+application.yml
+---------------
+##if any problem
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+    ###or
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+request(customer)(Spring_Cloud_Server):
+-----------------------------------------
+applicatio.yml
+-------------------
+spring:
+  application:
+    name: hello-server
+
+server:
+  port: 8071
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+
+
+
+reposnse(product)(Spring_Cloud_Client)
+----------------------------------------
+spring:
+  application:
+    name: hello-client
+
+server:
+  port: 8072
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+
+
+<properties>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+    </properties>
+    <dependencies>
+    <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
+
+----------------------------------------
+-------::::::::30/07/2021::::::::::::::---------------
+
+-Zuul (API GATE WAY):
+---------------------
+---TASK:::::
+--->what is the defferent between application.properties and application.yml
+---------------------------
+appication.yml
+--------------
+profile
+       dev
+
+
+
+
+
+
+---
+profile
+       test
+
+
+
+
+
+---(we seperate with ifen).
+
+-----------------------------
+Zuul api gate way----
+---------------
+--->http://localhost:8079/api/client/rest/hello/client
+--->RestTemplate is class 
+@LoadBalanced
+client also accepts number of request thats why using
+Ribbon
+-------

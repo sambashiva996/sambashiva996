@@ -1,0 +1,147 @@
+[3:44 PM] G Revathi
+    
+Spring boot
+---
+1.adding dependency
+1.version
+Spring-core
+4.3.9.relase
+Spring-web
+spring-webmvc
+spring-orm
+spring-jdbc
+Hibernate-core
+hibenate-validator
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>1.2.4.RELEASE</version>
+</parent>
+<dependencies>
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-web</artifactId>spring-core 4 and 5,spring-web,spring-webmvc
+</dependency>
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-data-jpa</artifactId>Hibernate,jpa,Spring datajpa
+</dependency>
+</dependencies>
+
+
+Spring Boot 1
+1.5.7
+1.4.3
+1.3.1
+Spring Boot 2
+2.4.2
+2.2.4
+2.0.3
+
+
+2.
+DispatcherServlet
+ViewResolver
+
+
+3.tomcat server
+  Tomcat,Jetty,UnderTow
+  devtools dependecy
+   restart server
+
+
+4. server.port=8010
+
+
+5.
+spring-jdbc     Jdbctemplate
+spring-orm       Hibernate
+Hibernate-core   Hibernate
+mysql
+Spring Data Jpa
+
+
+
+Ways to spring boot application
+----------------
+1.Maven project
+2.Spring starter project(STS)
+3.Spring initializer
+4.Spring Boot CLI
+
+
+
+File-->new-->spring starter project-->next-->
+ spring-boot-web      spring-boot-data-jpa
+  lombok              spring-boot-starter-test
+
+
+
+
+@SpringBootApplication---->@Configruation,@EnableAutoConfiguration,
+
+
+@ComponentScan
+com.employeemanagement.main
+
+
+public class SpringBootApplicationDemo
+{​​​​​​​
+
+
+public static void main(String a[])
+{​​​​​​​
+SpringApplication.run(SpringBootApplicationDemo.class);
+}​​​​​​​
+}​​​​​​​
+
+
+com.employeemanagement.main.controller
+com.employeemanagement.main.service
+com.employeemanagement.main.dao
+
+
+application.properties
+----------
+server.port=8077
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+
+
+
+@RestController
+public class DemoController
+{​​​​​​​
+@RequestMapping("/home")
+public ModelAndView home()
+{​​​​​​​
+return new ModelAndView("home");
+}​​​​​​​
+}​​​​​​​
+
+
+1.start ur application(main)
+2.open a browser
+3.http://localhost:8077/home
+
+
+
+src--->webapp--->web-inf--->jsp--->home.jsp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

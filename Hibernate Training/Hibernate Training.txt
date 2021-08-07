@@ -1,0 +1,397 @@
+;------------Hibernate---------------
+
+-->automatic creation tables
+-->no need to write query
+-->predifine method
+-->save(obj);
+--> Databasee Dialect
+
+[12:54 PM] G Revathi
+    
+jdbc
+1.table exist
+2.insert into car valesu(1....15)
+3.predefined method
+4.database dependent
+5.connection object per request
+
+
+Hibernate
+------
+automatic creation of table
+no need to write query
+predefined method
+save(car);
+database independent(Dialect)
+
+
+
+------------------------------
+
+-------------------------------------16/07/2021--------------------------------
+
+---> struts,spring,JSF wants communicate with Database Hibernate Support
+---> types of ORM Tools
+   --Hibernate
+   --mybatis/ibatis
+   --Toplink
+   --Eclipselink
+
+--->  Java application --> Object--> HIbernate --> Database
+
+    ----------------------     Java Application-----
+                             ---> Object
+                               --->Hibernate
+                                  --->hibernate.cfg.xml(Mandatory)
+                                       ---> Car.hbm.xml
+                                         --->Database
+
+POJO -->Plain Old Java Object (Enity,model,java bean)
+POJI -->Plain old Java Interface
+
+-----------------------
+hibernate.cfg.xml
+---------------
+<hibernate-configuration>
+<!--database datails-->
+<property name = "driver_class">com.mysql.jdbc.Driver</property><mysql 5>
+<property name = "connection.driver_class">com.mysql.cj.jdbc.Driver</property><mysql 8>
+<property name = "url">jdbc:mysql://localhost:3306/mysql</proprty>
+<property name = "connection.url">root</property>
+<property name = "connection.username">root</property>
+<property name = "connection.password">root</property>
+<!--hibernate details-->
+<property name = "dialect">org.hibernate.dialect.MySQLDialect</property>--> used to differet db connctions
+<property name = "show_sql">true</property>
+<property name = "format_sql">true</property>
+<property name = "hdm2ddl.auto">create, create-drop, validate, update</property>
+
+</hibernate-configuration>
+
+--hdm2ddl.auto validate: validate is used to check table is exist or not check if not shows does not exist
+--hdm2ddl.auto update: it will create table and update operations if it exist then update otherwise create table
+------------------
+
+--Car.hbm.xml
+-------------------
+<hibernate-mapping>
+<Class name = "com.demo.Car" table = "cardeatils">
+<id name = "carId">
+<generator class = "assigned"></generator><!--developer>
+<generator class = "increment"></generator><!-- auto increment-->
+<property name = "carModel" column = "car_model" length = "20" nullable = "false"> MANDATORY
+<property name = "carMake" column = "car_make" length = "20" nullable = "false">
+<property name = "carName" column = "car_name" length = "20"nullable = "false">
+</id>
+</Class>
+</hibernate-mapping>
+
+--Customize table creation proved if dont want to pojo classs default
+----
+---> these two hibernate.cfg.xml and Car.hbm.xml are madatory to wrtite without these fiels progaram should not work
+
+
+
+--The possible options are,
+	
+-validate: validate the schema, makes no changes to the database.
+	
+-update: update the schema.
+	
+-create: creates the schema, destroying previous data.
+	
+-create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped.
+
+-------
+
+--->Session session = sessionFactory.getCurrentSession();//if session is exist tthen use it
+--->Session session = sessionFactory.openSession(); // it will create new session
+--> 4.0 version -- configuration
+ -->5.0 version -- standard service Registery
+
+-----SSL Certification error---in jdbc
+<property name = "url">jdbc:mysql://localhost:3306/mysql?verifyServerCertificate=false&amp;useSSL=true</proprty>
+
+
+---> get() method always hit DB   -->load() method --will hit ur proxy 
+                                      if proxy not having data then he will go to DB
+--->get is eager loading          -->lazy loading
+
+--->Transaction is used to only DML operations
+--->
+
+----------------------
+----Task-----
+-->hibernate mapping
+--annotation based mapping
+-->one to many
+-->@jointable and column
+------->
+    @joincolumn and @jointable
+    how to create basic appliocation using annotation
+
+-------::::::::::19/07/2021:::::::::::::::::---------
+
+--->States of hibernate
+   --transient -- from configuration to session
+    --persistence -- save the object
+     --detached -- after closing the session
+
+--->persistence() method will return Serializable object
+--->Session Destroy-----
+   --close-- it will close session and connection	
+    --clear-- it clear all the session object to detached state
+      --evict -- it will ask paticuler object to detached not all objects	
+
+>---Relationships--
+--->oneToMany--->oneToOne--->manyToOne--->manyToMany
+--->@JoinColumn Annotation is USED to create id in Second TABLE AND PARENT AND CHILD REALATIONSHIP ALSO
+--->@joinColumn add in Entity Third Table will not create
+--->
+--->@Jointable is used to customize thrid table which table is  created
+
+------::::::::::::::::::::---------------
+
+--Spring with hibernate Configuration--
+
+--->com.demo.service
+    
+   --->LoginServiceIntf
+       @Serivce
+   --->LoginSeriveImpl
+
+--->com.demo.dao
+
+   --->LoginDaoIntf
+       @Repository
+   --->LoginDaoImpl
+
+--------::::::::::20/07/2021:::::::::::::::--------
+
+--->HQL(Hibernate Query Launguage)
+  --->Query query = seesion.createQuery("from Registration")//select *from tbl_registration
+     --->List<Registration> list = query.list();
+
+--->NativeSQL
+    --->Query query = seesion.createSQLQuery("select *from tbl_registration").addEntity(Registration.class)
+
+[11:45 AM] G Revathi
+    
+Hibernate
+-----------
+--HQL(Hibenate Query language)
+--NativeSQL
+--Criteria Query(javatpoint)
+
+
+HQL
+------------
+Query query=session.createQuery("from User");//select * from logindeatils
+List<User> list=query.list();
+return list;
+
+
+NativeSQL
+------------
+Query query=session.createSQLQuery("select * from logindetails").addEntity(User.class); 
+List<User> list=query.list();
+return list;
+
+Criteria Query(Javatpoint)
+----------------------------
+
+--NamedQuery
+--NamedNativeQuery
+
+NamedQuery
+------------
+--->it will always take HQL
+--->Query query = session.createQuery("from Employee");
+--->from Employee --> findAllEmployeeDetails
+--->@NamedQuries--parent annotation and it will take multiple quries
+
+-----------:::::::::::::::::::21/07/2021:::::::::::::::-----------------
+
+@NamedQueries(
+{
+@NamedQuery(name = "findEmployeeByName", query="from Employee e where e.empname=:name")
+@NamedQuery()
+}
+)
+
+@Entity
+@Table
+public class Employee{
+private int id;
+private String name;
+private String age;
+}
+
+Main
+-----
+Configuration
+SessionFactory
+Session
+Query query = session.getNamedQuery("findEmployeeByName");
+query.setParameter("name","samba");
+List<Employee> list=query.list();
+list.forEach(emp->sysout(emp));
+--------------------------------------------
+Example
+
+[10:43 AM] G Revathi
+    
+@NamedQuery------>HQL
+@NamedNativeQuery---->Native SQL
+
+
+
+NamedQuery
+-------------
+Query query=session.createQuery("from Employee");
+
+
+
+from Employee--->findAllEmployeedetails
+
+
+@NamedQueries(
+{​​​​​​​
+@NamedQuery(name="findEmployeeByName",query="from Employee e where e.empname=:name")
+@NamedQuery()
+}​​​​​​​
+)
+
+
+
+@Entity
+@Table(name="")
+public class Employee
+{​​​​​​​
+private int id;
+private String name;
+private String age;
+}​​​​​​​
+
+Main
+------------
+Configuration
+SessionFactory
+Session
+Query query=session.getNamedQuery("findEmployeeByName");
+query.setParameter("name","revathi");
+List<Employee> list=query.list();
+list.forEach(emp->sysout(emp));
+
+---------------------------------------------
+
+--NamedNativeQuery:
+--------------------------
+
+[10:43 AM] G Revathi
+    
+@NamedQuery------>HQL
+@NamedNativeQuery---->Native SQL
+
+
+
+NamedNativeQuery
+-------------
+Query query=session.createQuery("from Employee");
+
+
+
+from Employee--->findAllEmployeedetails
+
+
+@NamedNativeQueries(
+{​​​​​​​
+@NamedNativeQuery(name="findEmployeeByName",query="select- *from emp where empname=:name",resultClass=Employee.class)
+@NamedNativeQuery()
+}​​​​​​​
+)
+
+
+@Entity
+@Table(name="")
+public class Employee
+{​​​​​​​
+private int id;
+private String name;
+private String age;
+}​​​​​​​
+
+
+
+Main
+------------
+Configuration
+SessionFactory
+Session
+Query query=session.getNamedQuery("findEmployeeByName");
+query.setParameter("name","revathi");
+List<Employee> list=query.list();
+list.forEach(emp->sysout(emp));
+
+
+Inheritence Concepts in Hibernate
+--------------------------------------
+
+----------------------------------------------------
+
+---Case Study Task::
+Register
+Login
+Add Pet
+Buy Pet
+My Pet
+
+1)Login-->have signup button
+2)menu bar--> Home AddPet MyPet
+Home Page --in db pet details
+----
+id petname petage petplace  buy/sold
+1  German  5      hyderabad buy
+2  BullDog 7      warangal  buy
+3  Poodle  4      Thorrur   buy
+4  Akitha  7      Noida     buy
+
+AddPet
+-----
+view page enter pet details
+-------
+Pet Name  Akitha
+Pet Age   7
+PetLocation Noida
+submit
+--->after submit automatially goto home page show these details and show buy option
+--->login or logout or any simblo we get from glyphicons bootstrap4
+--->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

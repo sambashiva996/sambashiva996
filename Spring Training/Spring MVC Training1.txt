@@ -1,0 +1,89 @@
+[1:49 PM] G Revathi
+    
+Banking application
+--------
+                                         RegisterController
+<a href="loadLoginPage">Login</a>
+  <a href="FundTransfer>FundTransfer</a>                                                            LoginController
+   Request-->DispatcherServlet ---->     Add beneficiaryController
+               (FrontController)          Fund transferController
+
+
+@Controller
+public class LoginController
+{​​​​​​​
+//Load my Login Page
+@RequestMapping("loadLoginPage")
+public ModelAndView loadLoginPage()
+{​​​​​​​
+return new ModelAndView("Login");//jsp page--->Login.jsp
+}​​​​​​​
+
+
+To store my Data in Database
+}​​​​​​​
+
+
+index.jsp
+----------
+
+
+<a href="loadLoginPage">Login</a>
+
+
+web.xml
+---------
+<web-app>
+<servlet>
+<servlet-name>spring</servlet-name>
+<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>spring</servlet-name>
+<url-pattern>/</url-pattern>
+</servlet-mapping>
+</web-app>
+
+
+LoginController
+0------------
+@Controller
+public class LoginController
+{​​​​​​​
+@RequestMapping("/loadLoginPage")
+public ModelAndView loadLoginPage()
+{​​​​​​​
+return new ModelAndView("Login");//Login.jsp
+}​​​​​​​
+}​​​​​​​
+spring-servlet.xml
+----------
+<beans>
+     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="prefix" value="/WEB-INF/jsp"/>
+<property name="suffix" value=".jsp"/>
+</bean>
+</beans>
+
+
+Login.jsp
+-------------
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+
+
+
+
+
+
+

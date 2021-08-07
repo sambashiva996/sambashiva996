@@ -1,0 +1,88 @@
+JAVA 8
+
+LomBok Library==> used for generate setters and getters and constructors
+
+java 8 memory management ===>
+
+---Metaspace gives memory extention thats why they go for metaspace to avoid permanent gen
+
+3 types of generations
+
+-young gen
+-old gen
+-permanent gen -- always fixed mempry it replace with menta space is extend the memory
+
+---> after java 8 closes all connections so introduced try with resources use AutoClosesable interface and all clases implements this interface
+
+---> set have a method descendingSet() method.
+
+---> load factor(0.75) in hashmap is increase capacity of bucket if bucket is full 75% then incease capacity for next bucket.
+---> legacy class i.e vector , hashtable, remaing collection class
+---> concurrenthashmap i.e fail-safe does not throw exception and hashmap i.e fail-fast throw exception i.e concurrentmodification exception
+---> lock on hashmap i.e block entire operation 
+---> concurrenthashmap lock on only one segment.
+---> we call constructor abstract class by help of child class instiation.
+---> type inference i.e List<String> ls = new ArraList<>() we can not mention right side
+--->help of LamdaExpressions we can reduce no of Lines and improve the perfformance
+--->functional inerface have one abtract methoe and default and static methods optional
+
+Predefined FUNCTIONAL Inerfaces::::
+-Predicate-test();
+-Counsumer-accept();
+-Function-apply();
+-Supplier-get();
+
+---Predicate:any take of input and retunes boolean and it is having one abtract method is test();
+---Function: it can take two inputs one is input and two is output and Function<Integer,String> fn = num->num%2==0?"even":"odd"; and having apply(); method.
+---BiFunction : it can take three inputs and retunes of one output and it is having apply() method.BiFunction<Integer,Integer,String> bi = (num1,num2)->(num1+num2)==0;
+---Consumer : it is having accept() method it can take any format and output is void.
+---Supplier: it is having get() method and it does not take any value and retunes value.Supplier<Integer> fn= name.lenth();String name "afasf"; retunes integer format.
+
+STREAM API::::
+
+---> stream() method is having two operations one is intermediate and  second id terminal and filter() is intermediate and .forEach() is terminal.
+---> filter() method fiter the data based on condtion retunes of entire object
+---> map() method will map the based on object retunes entire row
+---> sorted() sort the object based on condtion it can have comparoter interface we can pass values based which value.
+---> collect() method to collect the value to store in list. using .collect(Collectors.toList();
+     and we can add "," to each value in list then we use string.join(",",list);
+
+---Optional Class::: if value is there going to check value and print it otherwise print empty
+--> Optiona class belongs to Guava api.
+Optional op = Optional.ofNullable(str[5]); \
+
+                                               --Date: 07/07/2021-----
+
+-Method Reference::
+---> List<String> ls;
+--->ls.forEach(System.out::println); internally it invokes println method accept any type of value as we declared in Collection interface or class
+---> we can not declare method reference ::
+
+TASK::
+---method reference in main method using interface and child class main method
+
+--------------------------------------
+
+--- if dont want optional class before object address we use get() method i.e: op.get();
+
+--:::::::::::::::::::DATE AND TIME API::::::::::::::::::::::
+
+---> these all are coming in time package...
+---LocalDate,LocalDateTime calsses
+
+---Period ,  Duration classes
+
+---Temporal class is used in Date and Time related funtions
+
+----Duration always print seconds
+
+::::Chrono Unit::::
+
+----chrono unit take the current date add one week like that operarions will do
+
+
+
+
+
+
+

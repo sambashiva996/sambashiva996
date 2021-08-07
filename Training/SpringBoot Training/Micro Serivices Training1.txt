@@ -1,0 +1,112 @@
+[1:06 PM] G Revathi
+    
+Micro services
+--------
+Monolith application
+
+
+
+product
+order
+payment
+invoice
+
+
+war
+jar
+
+
+Micro services
+-----------
+Service Registry and discovery
+1)Eureka server
+2)Zoo Keeper
+3)Consul
+
+
+
+Service 1---------->service 2
+Customer ----------->product
+http://localhost:8990/product/productdetails
+http://123.23.34.45:8764/product/productdetails
+
+
+
+Eureka
+---------
+customer-service--->http://localhost:8001
+product-service---->http://123.34.45.56:8012
+cart-service------->http://localhost:8003
+
+
+http://product-service/product/productdetails
+
+
+http://123.34.45.56:8012/product/productdetails
+
+
+Ribbon
+----------
+Routing and load balancin
+
+
+Hystrix 
+-------------------
+Circuit breaker
+fallback
+
+
+Service 1---------->service 2
+Customer ----------->product
+http://product-service/product/productdetails
+
+
+fallback
+
+
+Eureka server
+Ribbon
+---------
+javainuse--->
+
+
+Hystirx--->techprimers
+Zuul--->Tech primers
+
+
+request--->ZUUL(API gateway)---> eureka
+
+
+Spring security
+JWT--->Java techie
+OAUTH2
+API key
+Keyclock
+
+
+
+Turbine
+---------
+
+
+Rest template and feign client
+-------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

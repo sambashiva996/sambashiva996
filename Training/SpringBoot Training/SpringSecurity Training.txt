@@ -1,0 +1,50 @@
+---:::03/08/2021::::------
+--Spring Security---
+---------------------
+--
+@RestController
+@RequestMapping("/api")
+public class EmployeeController{
+
+
+}
+
+--->Spring Security will Do Two Important Works:
+    1)Authentication
+    2)Authorization
+--JWT
+OAUTH2
+API KEY
+KeyClock
+--1)Authentication:to get credentials and verify
+--->Jdbc authentication
+  --->InmemoryAthentication
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigureAdapter{
+
+public void configure(AthenticationManagerBuilder auth){//check user credentials by this method
+
+auth.inMemoryAuthentication().withUser("samba").password("samba").roles("USER")  
+                             .and().with("admin").password("samba").roles("ADMIN");
+
+}
+
+public void configure(HttpSecurity http){//this is autherization
+
+http.authrizationRequests()
+    .antMatchers("/api/employees")//it will to rest end points
+    .hasRole("ADMIN")
+    .and()
+    .csrf().disable()//cross-site-request-forgery(csrf) and if want enable 
+                         we create one token is identified by particuler request and response
+    .formLogin();
+}
+
+
+}
+
+
+--->after springboot 2.0 version it will ask passwordEncoder
+TASK::--->SpringSecurity give bcript passwordEncoder
+
+

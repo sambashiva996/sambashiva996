@@ -1,0 +1,311 @@
+
+                                                                          ::::Java 1.8::::
+package com.demo;
+@FunctionalInterface
+interface Square
+{​​​​​​​
+    int calculate(int x);
+    
+}​​​​​​​
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+    Square s=(x)->x*x;
+    System.out.println(s.calculate(5));
+}​​​​​​​
+}​​​​​​​
+Predefined Functional interface
+-------------
+Predicate
+Consumer
+Function
+Supplier
+
+
+Predicate
+------------
+Predicate<Integ> pr=a->(a>18);
+pr.test(12)
+
+
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+    Predicate<String> pr=a->(a.length()>10);
+    System.out.println(pr.test("revathi"));
+    
+}​​​​​​​
+}​​​​​​​
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+    Function<Integer,String> fn=num->num%2==0?"even":"odd";
+    System.out.println(fn.apply(4));
+    
+}​​​​​​​
+}​​​​​​​
+
+
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+    BiFunction<Integer,Integer,String> fn=(num1,num2)->(num1+num2)%2==0?"even":"odd";
+    System.out.println(fn.apply(4,2));
+    
+}​​​​​​​
+}​​​​​​​
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+    BiPredicate<Integer,Integer> fn=(num1,num2)->(num1+num2)>20;
+    System.out.println(fn.test(4,2));
+    
+}​​​​​​​
+}​​​​​​​
+
+
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+
+
+    Consumer<String> fn=name->System.out.println(name);
+    fn.accept("revathi");
+    
+}​​​​​​​
+}​​​​​​​
+
+
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+String name="revathi";
+    Supplier<Integer> fn=()->name.length();
+    System.out.println(fn.get());
+    
+}​​​​​​​
+}​​​​​​​
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+List<Product> ls=new LinkedList<Product>();
+ls.add(new Product(1,"hamam",60));
+ls.add(new Product(2,"dove",100));
+ls.add(new Product(3,"medimix",50));
+Iterator<Product> itr=ls.iterator();
+while(itr.hasNext()){​​​​​​​
+    Product pro=itr.next();
+    if(pro.getPrice()<60)
+    {​​​​​​​
+        System.out.println(pro.getProId()+" "+pro.getProName());
+    }​​​​​​​
+}​​​​​​​
+}​​​​​​​
+}​​​​​​​
+
+
+intermediate operation
+terminal operation
+
+
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+List<Product> ls=new LinkedList<Product>();
+ls.add(new Product(1,"hamam",60));
+ls.add(new Product(2,"dove",100));
+ls.add(new Product(3,"medimix",50));
+long count=ls.stream().filter(product->product.getPrice()>=50)
+            .count();
+System.out.println(count);
+}​​​​​​​
+}​​​​​​​
+
+
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+List<Product> ls=new LinkedList<Product>();
+ls.add(new Product(1,"hamam",60));
+ls.add(new Product(2,"dove",100));
+ls.add(new Product(3,"medimix",50));
+ls.stream().filter(product->product.getPrice()>=50)
+            .map(product->product.getPrice())
+            .forEach(price->System.out.println(price));
+
+
+}​​​​​​​
+}​​​​​​​
+
+
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+List<Product> ls=new LinkedList<Product>();
+ls.add(new Product(1,"hamam",60));
+ls.add(new Product(2,"dove",100));
+ls.add(new Product(3,"medimix",50));
+ls.stream().filter(product->product.getProName().equals("hamam"))
+                    .forEach(product->System.out.println(product));
+
+
+}​​​​​​​
+}​​​​​​​
+
+
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+List<Product> ls=new LinkedList<Product>();
+ls.add(new Product(1,"hamam",60));
+ls.add(new Product(2,"dove",100));
+ls.add(new Product(3,"medimix",50));
+ls.stream().sorted((p1,p2)->p1.getPrice()-p2.getPrice())
+.map(product->product.getPrice())
+           .forEach(price->System.out.println(price));
+
+
+}​​​​​​​
+}​​​​​​​
+
+
+public class FunctionalInterfaceDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+List<Product> ls=new LinkedList<Product>();
+ls.add(new Product(1,"hamam",60));
+ls.add(new Product(2,"dove",100));
+ls.add(new Product(3,"medimix",50));
+List<String> list=ls.stream().map(product->product.getProName()).collect(Collectors.toList());
+String str=String.join(",", list);
+System.out.println(str);
+}​​​​​​​
+}​​​​​​​
+
+::::::::::07/07/2021:::::::::::
+
+-----
+
+[11:41 AM] G Revathi
+    
+class MethodReferenceWithFunctionalInterface
+{​​​​​​​
+    public static void main(String[] args) {​​​​​​​
+        List<Employee> ls=new LinkedList<>();
+        ls.add(new Employee(1,"revathi",35));
+        ls.add(new Employee(2,"drish",5));
+        ls.add(new Employee(3,"john",55));
+        Comparator<Employee> comparator = Comparator.comparing( Employee::getAge );
+
+
+        Optional<Employee> op=ls.stream().max(comparator);//2 drish 5 
+          
+        if(op.isPresent())
+        {​​​​​​​
+            System.out.println(op.get());//3 john 55
+        }​​​​​​​
+        else
+        {​​​​​​​
+            System.out.println("empty");
+        }​​​​​​​
+        
+    }​​​​​​​
+}​​​​​​​
+ 
+
+
+
+--------------------------------
+
+[11:41 AM] G Revathi
+    class MethodReferenceWithFunctionalInterface
+{​​​​​​​
+    public static void main(String[] args) {​​​​​​​
+        List<Employee> ls=new LinkedList<>();
+        ls.add(new Employee(1,"revathi",35));
+        ls.add(new Employee(2,"drish",5));
+        ls.add(new Employee(3,"john",55));
+        ls.add(new Employee(4,"john",56));
+        Map<String,List<Employee>> list=ls.stream().collect(Collectors.groupingBy(Employee::getName));
+        list.forEach((name,listOfNames)->System.out.println(name+" : "+listOfNames));
+    }​​​​​​​
+}​​​​​​​
+ 
+------------------------------------
+
+---[11:53 AM] G Revathi
+    public class DateFunctionsDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+    LocalDateTime ldt=LocalDateTime.now();
+    System.out.println(ldt);
+    DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+    System.out.println(dtf.format(ldt));
+}​​​​​​​
+}​​​​​​​
+ 
+-----------------------------
+
+[11:56 AM] G Revathi
+    public class DateFunctionsDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+    Period period = Period.ofDays(26);
+    Temporal temp = period.addTo(LocalDate.now()); //07-07-2021-->31-07-2021
+    System.out.println(temp);
+}​​​​​​​
+}​​​​​​​
+ 
+
+----------------------------
+
+[11:59 AM] G Revathi
+     
+public class DateFunctionsDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+    LocalDate startDate = LocalDate.parse("2017-02-13");   
+    LocalDate endDate = LocalDate.parse("2018-08-20");
+    Period period = Period.between(startDate, endDate);
+    System.out.println(period);
+}​​​​​​​
+}​​​​​​​
+
+
+--------------------------------
+
+
+[12:12 PM] G Revathi
+    public class DateFunctionsDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+    LocalDateTime oldDate = LocalDateTime.of(2016, Month.AUGUST, 31, 10, 20, 55);
+    LocalDateTime newDate = LocalDateTime.of(2016, Month.DECEMBER, 9, 10, 21, 56);
+    Duration duration=Duration.between(oldDate, newDate);
+    System.out.println(duration);
+    System.out.println(duration.getSeconds());//2400*60*60+61
+}​​​​​​​
+}​​​​​​​
+ 
+
+----------------------------------
+
+[12:14 PM] G Revathi
+    public class DateFunctionsDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+     LocalDate today = LocalDate.now();
+    LocalDate nextWeek = today.plus(1, ChronoUnit.DAYS);
+    System.out.println(nextWeek);
+}​​​​​​​
+}​​​​​​​
+
+
+---------------------------------
+
+[12:15 PM] G Revathi
+    public class DateFunctionsDemo {​​​​​​​
+public static void main(String[] args) {​​​​​​​
+     LocalDate today = LocalDate.now();
+    LocalDate nextWeek = today.minus(6, ChronoUnit.YEARS);
+    System.out.println(nextWeek);
+}​​​​​​​
+}​​​​​​​
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

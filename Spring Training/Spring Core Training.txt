@@ -1,0 +1,141 @@
+:::::::::::::::SPRING TRAINING::::::::::::::::
+
+-Servlets
+-Struts:::(Front end)
+---> there is no predifinded database tools
+---> even run the application it needs to ask add some classes
+---> it is only for UI concepts
+
+-Spring:::(Front end,Back end)
+-----------------------------------
+---> it is provide everything tools
+--->it is provides predifined interfaces,classes,
+---->Non invasive -no need to force to write code Developer
+--->invasive supports Struts because of force to write code developer
+---> Hibernate is Non Invasive
+
+-Spring Core Modules::
+----------------------------------
+--->Spring Core
+--->Srping Web
+--->Spring WebMVC
+--->Spring JDBC -- JDBCTemplate
+--->Spring ORM -- Hibernate
+--->Spring AOP -- Cross Cutting Functionalities like common code it decrease the class size
+--->Spring Test -- JUnit, Mockito
+
+::::::::::Spring Core::::::::::
+----------------------
+
+---Spring Bean
+---IOC Container(BeanFactory, ApplicationContext)
+---Dependency Injection
+---Spring Bean Life Cycle
+---Spring Bean Scope
+---Spring Autowiring
+
+------Pom.XML------------
+---------------------------
+---right click on project ---> terminal--> mvn clean install
+---right click on project--->maven ---> update maven
+
+-::Two Concepts::-
+-----------------------
+-lazy Loading(BeanFactory)--when we use getBean() method that time create instantiate 
+-Eager Laoding(ApplicationContext)--in that we can get object and already created we get directly by help getBean() method
+
+----------------------
+
+--::::::::::::::Spring Bean Life Cycle--:::::::::
+
+----------------------------
+--we can configure 3 ways--
+
+--Java Configuration
+--> IntializingBean - void afterPropertiesSet() throws Exception and DesposableBean -void destroy() throws Exception interface
+
+--XML Configuration
+-->init-method and destroy-method
+
+--Annotation Configuration
+-->@Postconstruct and --> @PreDestroy
+
+
+-::two life cycles::-
+--int
+--Destroy
+
+---->mvn install
+
+-interface:::
+--->ApplicationContext
+--implementation classes,,,
+-ClassPathXmlApplicationContext("Beans.xml")--->
+     --SpringDemo
+       --->src/main/java
+          --->com.demo
+              --->Main
+                 --->Employee
+       --->Beans.xml
+
+-FileSystemXmlApplicationContext(c:\\samba\\....)
+-WebXmlApplicationContext
+
+---->BeanFactory
+
+--implementation classes::::
+   --->XmlBeanFactory
+
+  -Eager Loaded
+--ApplicationContext ac = new ClassPathXmlApplicationContext("Beans.xml");
+-Lazy-init=true
+-Employee
+-Student
+-Department
+
+    Lazy Loaded
+--->Resource resourse = new ClassPathResourse("Beans.xml")
+
+   ----> BeanFactory beanFactory = new XmlBeanFactory(resourse)
+
+----------------------------------
+
+                                                   -------12/07/201---------
+
+----In container how many objects u create it treated as single bean --per container per bean
+    by default it is singleton scope
+
+----if we create two containers it will treated as two different containers and objects
+
+--->context.close() it belongs to AbtractApplicationContext interface
+
+---->Primary or auto-condiate for selecting object from beans.xml
+---> singleton create one isntance but we can give multiple values and it has only one address object
+
+--->JDBCTemplate from Spring-JDBC Lib so we need to add dependency
+
+------------------------------
+
+-------:::JDBCTemplate:::------------
+
+--->JDBCTemplate gives the CRUD operations vise versa
+--->DataSource give the database details like driver,url,username,password
+
+--->RowMapper interface is used for fetching operation from database
+
+                                               :::::::::13/07/2021::::::::::::
+
+---> RowMapper is interface and it is having only one method and it is consider as FunctionalInterface
+
+
+
+
+
+
+
+
+
+
+
+
+

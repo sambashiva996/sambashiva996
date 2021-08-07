@@ -1,0 +1,183 @@
+----::::::::::21/07/2021::::::-----------
+-----SpringBoot----
+
+--issues in spring
+--->adding dependency
+--->version
+--->Spring-core
+--->Spring-web
+--->Spring-webmvc
+--->it will give single annotation above three
+--->spring-orm
+--->spring-jdbc
+--->hibernate-core
+--->hibernate-validater
+---->it will give single annotation above three
+
+--->devtools dependency -->automatically restrat the server
+--->server.prt=8010
+
+---Spring Data Jpa----
+it is combination of all spring-jdbc,spring-orm,hibernate-core,mysql
+
+-----Ways to Spring boot application
+--------------------------------
+1.Maven
+2.Spring strater project
+3.spring initializer
+4.spring boot CLI
+
+File-->newspring starter project-->next-->
+  spring-boot-web           spring-boot-data-jpa
+  lombok                    spring-boot-starter-test
+  
+---->https://start.spring.io/
+
+-------------------------------
+--@SpringBootApplication--
+------------------------------
+--->Combination of --->@Configuration,@EnableAutoConfigaration,@ComponentScan
+--->
+--->spring boot petclinic
+--->spring boot banner.txt
+
+https://mkyong.com/spring-boot/spring-boot-custom-banner-example/
+
+https://devops.datenkollektiv.de/banner.txt/index.html
+
+----:::::::::23/07/2032:::::::::----
+
+--->by default mysql use 8 version in pem.xml in springboot if u add version 5 it will override the with versin 5
+--->server port number standered between 0-65535 actually we are susing 80000-9000
+
+------------::::::::::::::::27/07/2021:::::::::::::---------------
+---> deleteEmployee?id=${employeeId}
+--->editEmployee?id=${employeeId}
+
+-RequestMapping("deleteEmployee")
+pubic ModelAndView deleteEmployee(){
+
+}
+
+--->testing springboot application by the help of Postman, SoapUI, Swagger
+--->
+-JSON--->Javascript Object Notation
+
+{
+"userName":"Samba"
+"password":samba"
+}
+
+--->Spring Boot + Spring Data JPA
+
+--Spring Data JPA--
+-------------------------
+--it provides repositories,
+
+--->JPARepository
+--->CRUDRepository
+--->Pagingandsortingrepository
+--->
+
+Spring Boot With Spring Data Jpa
+-----------------------------------
+
+main
+----
+remove-->@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
+
+config--->remove
+
+controller
+---------------
+@RestController = @Controller + @ReponseBody
+public class DemoController{
+
+@AutoWired
+EmployeeServiceIntf service;
+
+@RequestMapping("saveEmployee")
+public String saveEmployee(@RequestBody Employee emp){
+
+service.saveEmployee(emp);
+return "saved successfully";
+}
+
+@RequestMapping("fetchEmployees")
+public List<Employee> fetchEmployees(){
+
+List<Employee> emp = service.fetchEmployee();
+return emp;//json
+}
+
+@RequestMapping("fetchByUserName/{userName}")
+public Employee fetchByUserName(@PathVariable(userName)){
+
+Employee emp = service.fetchByName(userName);
+return emp;
+}
+
+public interface EmployeeServiceIntf {
+
+public void saveEmployee(Employee emp);
+List<Employee> fetchEmployees() emp;
+public Employee fetchByUserName(userName);
+}
+
+@Service
+public class ServiceImpl implements EmployeeServiceIntf {
+
+@Autowired
+EmployeeRepository repo;
+
+public void saveEmployee(Employee emp){
+
+repo.save(emp);
+
+}
+
+public List<Employee> fetchEmployees(){
+
+repo.findAll();
+
+}
+
+public Employee fetchByUserName(String userName){
+
+repo.findByName(userName);//userdefined method
+}
+}
+
+@Repository
+public interface EmployeeRepository extends JpaRepository<Employee,Integer>{
+
+public Employee findByName(String userName);
+
+public Employee findByNameAndAge(String userName,int Age);//select *from tab where username='samba' and age=10; //both are same
+;
+} 
+
+appication.properties
+----------------------
+spring.datasource.url = jdbc:mysql://
+spring.datasoure.username=
+spring.datasource.password=
+spring.datasource.driver-class=
+
+spring.jpa.hibernate
+---
+----------------------------------
+---Spring Boot using below Handlers
+
+--->@PostMapping
+--->@GetMapping
+--->@PutMapping
+--->DeleteMapping
+
+--->save-->serviceIntf-->serviceImpl--->
+
+----------------------------------------------------
+-----28/03/2021---------
+
+--Spring Batch-----
+--->

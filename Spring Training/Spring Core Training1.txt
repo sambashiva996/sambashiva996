@@ -1,0 +1,182 @@
+[12:23 PM] G Revathi
+    
+Servlet
+Struts(front end)
+Spring(front end , back end)
+Hiberate(back end)
+non-invasive(will not force develper)
+invasive(will force)
+
+
+Spring
+----------
+Spring core(Dpendency injection,IOC Container,Autowiring)
+Spring web
+spring webmvc
+Spring jdbc-->jdbctemplate
+Spring orm-->Hibernate
+Spring test-->
+spring aop--->
+
+
+Spring core
+-------------
+Spring Bean
+IOC container(Bean Factory, Application Context)
+Depenency injection
+Spring Bean life cycle
+Spring bean scope
+Autowiring
+
+
+
+pom.xml
+------------
+<project>
+<dependencies>
+<dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-core</artifactId>
+<version>4.3.9.RELEASE</version>
+</dependency>
+</dependecnies>
+</project>
+
+
+right click on ur projet-->showin-->terminal
+mvn clean install
+right click ur project-->maven-->update project
+
+
+public class IOCDemo
+{​​​​​​​
+main()
+{​​​​​​​
+//ApplicationContext context=new ClassPathXMLApplicationContext("beans.xml")
+Resource resource=new ClassPathResource("beans.xml");
+BeanFactory factory=new XmlBeanFactory(resource);
+Employee emp=context.getBean("emp",Employee.class);
+emp.display()
+}​​​​​​​
+}​​​​​​​
+SpringCore
+src/main/java
+   ---->com.demo
+        ----->Employee
+        ----->Main
+  -->beans.xml
+
+
+beans.xml
+----------
+<bean id="emp" class="com.demo.Employee">
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+</bean>
+<bean id="st" class="com.demo.Student">
+</bean>
+@Getter
+@Setter
+class Employee 
+{​​​​​​​
+private int id;
+private String name;
+public void display
+
+
+{​​​​​​​
+sysout (id +name);
+}​​​​​​​
+
+
+
+
+
+ApplicationContext(Eager Loading)
+BeeanFactory(Lazy Loading)
+
+
+
+ApplicationContext context=new ClassPathXmlApplicationContext("beans.xml");
+
+
+
+<bean id="emp" class="Employee"> emp
+
+
+<bean id="st" class="Student"> st
+
+
+Resource resource=new ClassPathResource("beans.xml");
+BeanFactory factory=new XmlBeanFactory(resource);
+factory.getBean("emp",Employee.class);
+
+
+Spring Bean life cycle
+------------
+Java Configuration
+XML configuration
+Annotation Configuration
+
+
+init
+destroy
+
+
+@Getter
+@Setter
+class Employee 
+{​​​​​​​
+private int id;
+private String name;
+@PostConstruct
+public void init()
+{​​​​​​​
+sysout("initialization");
+}​​​​​​​
+public void display()
+{​​​​​​​
+System.out.println(id +"   "+name);
+}​​​​​​​
+@predestory
+public void destroy()
+{​​​​​​​
+sysout("destroy");
+}​​​​​​​
+
+
+main()
+{​​​​​​​
+AbstractApplicationContext context=new ClassPathXMLApplicationContext("beans.xml")
+Employee emp=context.getBean("emp",Employee.class);
+emp.display();
+context.close();
+context.registershutdownhook();
+}​​​​​​​
+
+
+<context:annotation-config>
+<bean id="emp" class="com.demo.Employee">
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+</bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

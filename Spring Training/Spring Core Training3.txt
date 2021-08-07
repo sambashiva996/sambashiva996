@@ -1,0 +1,452 @@
+[12:38 PM] G Revathi
+    
+@Getter
+@Setter
+public class Employee
+{​​​​​​​
+private int id;
+private String name;
+}​​​​​​​
+
+
+main
+----------
+public class Main//per container per bean
+{​​​​​​​
+public static void main(String args[])
+{​​​​​​​
+ApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+Employee emp=context.getBean("emp",Employee.class);
+emp.setId(1);
+sysout(emp.getId());//1
+emp.setName("revathi");
+sysout(emp.getName());//revathi
+Employee emp1=context1.getBean("emp",Employee.class);
+sysout(emp1.getId());//null
+sysout(emp1.getName());//null
+
+
+
+}​​​​​​​
+}​​​​​​​
+Resource resource=new ClassPathResource("Beans.xml")
+BeanFactory factory=new XmlBeanFactory(resource);
+
+
+Student st=factory.getBean("st",Student.class)
+Student st=(Student)factory.getBean("st");//Object
+
+
+Beans.xml
+--------------
+<beans>
+       <bean id="emp" class="com.demo.Employee" scope="prototype">
+        </bean>
+<bean id="st" class="com.demo.Student">
+        </bean>
+</beans>
+
+
+Spring Bean life cycle
+-----------------
+init()
+destroy()
+
+
+@Getter
+@Setter
+public class Employee
+{​​​​​​​
+private int id;
+private String name;
+
+
+public void initMethod()
+{​​​​​​​
+sysout("Init");
+}​​​​​​​
+public void display()
+{​​​​​​​
+sysout(id+" "+name);
+}​​​​​​​
+public void destroyMethod()
+{​​​​​​​
+sysout("destroy");
+}​​​​​​​
+}​​​​​​​
+
+
+Beans.xml
+--------------
+<beans>
+       <bean id="emp" class="com.demo.Employee" init-method="InitMethod" destroy-method="destroyMethod">
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+        </bean>
+<bean id="st" class="com.demo.Student">
+        </bean>
+</beans>
+
+
+public class Main//per container per bean
+{​​​​​​​
+public static void main(String args[])
+{​​​​​​​
+AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+Employee emp=context.getBean("emp",Employee.class);
+//emp.setId(1);
+//emp.setName("revathi");
+emp.display();
+context.close();
+context.registerShutDownHook();
+}​​​​​​​
+
+
+@Getter
+@Setter
+public class Employee
+{​​​​​​​
+private int id;
+private String name;
+@PostContruct
+public void initMethod()
+{​​​​​​​
+sysout("Init");
+}​​​​​​​
+public void display()
+{​​​​​​​
+sysout(id+" "+name);
+}​​​​​​​
+@PreDestroy
+public void destroyMethod()
+{​​​​​​​
+sysout("destroy");
+}​​​​​​​
+}​​​​​​​
+Beans.xml
+--------------
+<context:annotation-config/>
+<beans>
+       <bean id="emp" class="com.demo.Employee" >
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+        </bean>
+<bean id="st" class="com.demo.Student">
+        </bean>
+</beans>
+
+
+public class Main//per container per bean
+{​​​​​​​
+public static void main(String args[])
+{​​​​​​​
+AbstractApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+Employee emp=context.getBean("emp",Employee.class);
+//emp.setId(1);
+//emp.setName("revathi");
+emp.display();
+context.close();
+context.registerShutDownHook();
+
+
+@Getter
+@Setter
+public class Student
+{​​​​​​​
+private int id;
+private String name;
+private Address address;
+public String toString()
+{​​​​​​​
+return id+" "+name+" "+address;
+}​​​​​​​
+
+
+@Getter
+@Setter
+public class Address
+{​​​​​​​
+private String city;
+private String state;
+public String toString()
+{​​​​​​​
+return city+" "+state;
+}​​​​​​​
+}​​​​​​​
+
+
+main
+--------
+public class Main()
+{​​​​​​​
+main()
+{​​​​​​​
+ApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+Student st=context.getBean("st",Student.class);
+sysout(st);
+}​​​​​​​
+}​​​​​​​
+
+
+By using ref
+--------------
+Beans.xml
+---------
+<beans>
+     <bean id="st" class="com.demo.Student">
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+<property name="address" ref="addr"/>
+    </bean>
+
+
+    <bean id="addr" class="com.demo.Address">
+<property name="city" value="chennai"/>
+<property name="state" value="tn"/>
+    </bean>
+</beans>
+
+
+By  using Autowiring
+---------------
+<beans>
+     <bean id="st" class="com.demo.Student" auto-wire="byType">
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+    </bean>
+
+
+    <bean id="addr" class="com.demo.Address">
+<property name="city" value="chennai"/>
+<property name="state" value="tn"/>
+    </bean>
+<bean id="addr1" class="com.demo.Address" auto-candidate="false">
+<property name="city" value="bangalore"/>
+<property name="state" value="karntaka"/>
+    </bean>
+</beans>
+
+
+By using Bytype with multiple ean with same type
+----------
+<beans>
+     <bean id="st" class="com.demo.Student" auto-wire="byType">
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+    </bean>
+
+
+    <bean id="addr" class="com.demo.Address">
+<property name="city" value="chennai"/>
+<property name="state" value="tn"/>
+    </bean>
+<bean id="addr1" class="com.demo.Address" auto-candidate="false">
+<property name="city" value="bangalore"/>
+<property name="state" value="karntaka"/>
+    </bean>
+</beans>
+
+
+By using Bytype with multiple ean with same type
+----------
+<beans>
+     <bean id="st" class="com.demo.Student" auto-wire="byType">
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+    </bean>
+
+
+    <bean id="addr" class="com.demo.Address">
+<property name="city" value="chennai"/>
+<property name="state" value="tn"/>
+    </bean>
+<bean id="addr1" class="com.demo.Address" primary="true">
+<property name="city" value="bangalore"/>
+<property name="state" value="karntaka"/>
+    </bean>
+</beans>
+
+
+ByName
+-----------
+By using Bytype with multiple ean with same type
+----------
+<beans>
+     <bean id="st" class="com.demo.Student" auto-wire="byName">
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+    </bean>
+    <bean id="address" class="com.demo.Address">
+<property name="city" value="chennai"/>
+<property name="state" value="tn"/>
+    </bean>
+<bean id="addr" class="com.demo.Address">
+<property name="city" value="bangalore"/>
+<property name="state" value="karntaka"/>
+    </bean>
+</beans>
+
+
+Autowiring using annotation
+-------------
+
+
+@Getter
+@Setter
+public class Student
+{​​​​​​​
+private int id;
+private String name;
+
+
+@Autowired
+@Qualifier(name="addr2");
+private Address addr;
+
+
+public String toString()
+{​​​​​​​
+return id+" "+name+" "+address;
+}​​​​​​​
+
+
+@Getter
+@Setter
+public class Address
+{​​​​​​​
+private String city;
+private String state;
+public String toString()
+{​​​​​​​
+return city+" "+state;
+}​​​​​​​
+}​​​​​​​
+
+
+main
+--------
+public class Main()
+{​​​​​​​
+main()
+{​​​​​​​
+ApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+Student st=context.getBean("st",Student.class);
+sysout(st);
+}​​​​​​​
+}​​​​​​​
+---------
+
+
+<beans>
+<context:annotation-config>
+     <bean id="st" class="com.demo.Student">
+<property name="id" value="1"/>
+<property name="name" value="revathi"/>
+    </bean>
+    <bean id="addr1" class="com.demo.Address">
+<property name="city" value="chennai"/>
+<property name="state" value="tn"/>
+    </bean>
+<bean id="addr2" class="com.demo.Address">
+<property name="city" value="bangalore"/>
+<property name="state" value="karntaka"/>
+    </bean>
+</beans>
+
+
+Main
+----------
+public class Main{​​​​​​​
+
+
+public static void main(String args[])
+{​​​​​​​
+ApplicationContext context=new ClassPathXmlApplicationContext("Beans.xml");
+EmployeeDao dao=context.getBean("edao",EmployeeDao.class);
+Employee emp=new Employee(1,"revathi");
+dao.saveEmployee(emp);
+}​​​​​​​
+}​​​​​​​
+
+
+public class EmployeeDao
+{​​​​​​​
+@Autowired//context:annotation-config
+JdbcTemplate template;
+public String saveEmployee(Employee emp)
+{​​​​​​​
+String insertEmployee="insert into employee values("+emp.getId()+",'"+emp.getName()+"');
+template.update(insertEmployee);
+}​​​​​​​
+public String deleteEmployee(int empId)
+{​​​​​​​
+String deleteEmployee="delete from employee where id="+empId+"");
+template.update(deleteEmployee);
+}​​​​​​​
+}​​​​​​​
+
+
+}​​​​​​​
+}​​​​​​​
+Beans.xml
+-----------
+<beans>
+<bean id="ds" >
+<property name="driver" value="com.mysql.jdbc.Driver"/>
+<property name="url" value="jdbc:mysql://localhost:3307/mysql"/>
+<propery name="username" value="root"/>
+<propery name="passowrd" value="root"/>
+</bean>
+   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+<property name="dataSource" ref="ds"/>
+    </bean>
+    <bean id="edao" class="com.demo.EmployeeDao>
+<property name="template" ref="jdbcTemplate"/>
+    </bean>
+    
+</beans>
+
+
+
+Car Inventory system
+-----------
+spring core
+spring jdbc
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+
+Steps----
+
+--localrepo--> staging --> remoterepo
+
+--git init --> create git localrepo
+
+--git add . (or) -- git add Day3 --> Working directory
+
+--git comment 
+
+--git comment -m "commit in 13-07-2021"
+
+--git remote -v --> whether particuler folder refered to reposetory or not
+
+--git remote add origin https://github.com/rutiksalunke472000/semo.git
+
+--git push origin master
+
+
+
+------------------------
+
+git init--->create git local repository
+git add-->Working dirtory to staging area
+git commit
+git commit -m "commit on 13-07-2021"
+git remote -v
+git remote add origin https://github.com/rutiksalunke472000/semo.git
+git push origin master
+
+
+
+
+

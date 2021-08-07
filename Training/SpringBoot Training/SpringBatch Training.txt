@@ -1,0 +1,194 @@
+
+        --Spring Batch-----
+
+-----28/03/2021---------
+
+--->why we go to spring batch to excute batch of job
+--->batch of job =example::excuting time is a job
+--->job means task
+-Architechture--
+
+--->step 1 : JOb Scheduler(ex:it is Set the time for job,when system time reaches to 9:00 o'clock excute task automatcally)--->
+    ---like this tasks done by job scheduler
+   ---->cronz
+        --->step 2 : JobLauncher have run() method and jobscheduder communicate with joblauncher
+           --->it have all details of job
+             --->step is have  excute job in two steps in below
+               --->1.tasklet is doing a simple task ex: deleting temporory files
+                   and 2.chunk is doing a lenth task ex: read,process,wr
+                   --->all monitor details done by jobexcution and steops monitor by stepexcution                    
+                  --->these jobs created by requirements
+
+---->spring batch program:::using with springboot
+structure of sb with springboot
+-pom.xml
+-Main
+@EnableBatchProcessing
+-Controller
+------------
+@RestControler
+@RequestMapping("springbatchoperation")
+public class SpringBatchController{
+
+@Autowired
+JobLancher jobLancher;
+@Autowired
+Job job;
+
+@GetMapping("/load")
+public BatchStatus load(){
+
+JobExecution jobExecution = jobLauncher.run(job,null);
+
+return jobExecution.getStatus();
+}
+}
+jobConfiguration package
+----------
+@EnableBatchProcessing
+@Configuration
+public class JobConfiguration{
+
+@Bean
+public Job job(JobBuilderFactory jobBuilderFactory,
+StepBuilderFactory stepBuilderFactory,
+ItemReader<User> itemReader,
+ItemProesser<User,User> tiemProcesser,
+ItemWriter<User> itemWriter){
+
+Step step1 = stepBuilderFactory.get("Step1")//step name
+                              .<User,User>chunk(10)//it will devided 
+                              into 10 defferent chunks
+                              to get execution smoothly
+                              .reader(itemReader)
+                              .processor(itemProcessor)
+                              .writer(itemWriter)
+                              .build();
+
+Step step2 = stepBuilderFactory.get("Step2")//step name
+                              .<User,User>chunk(10)//it will devided 
+                              into 10 defferent chunks
+                              to get execution smoothly
+                              .reader(itemReader)
+                              .processor(itemProcessor)
+                              .writer(itemWriter)
+                              .build();
+
+return jobBuilderFactory.get("Job1")//how many times this job execute it will give count
+                        .incrementer(new RunIdIncrementor)//this is incrementing the job count like id generator in pojo class
+           7             .start(step1)
+                        .next(step2)
+                        .build();
+}
+
+ItemReader (.csv file) will do this job
+----------
+id name age email department
+1  samba 25  samba  101
+2  sam 26  sam  102
+
+ItemProcessor//it will update the department details before go to job
+----------
+Map map = new HashMap<String,String>();
+map.put(101,"cse");
+
+map.put(102,"ece");
+
+ItemWriter//this can get updated after itemProcessor
+----------
+id name age email department
+1  samba 25  samba  cse
+2  sam 26  sam      ece
+
+itemReader//below class is used for reading the files
+-------------------
+@Bean
+public FlatFileItemReader<User> itemReader(){
+
+FlatFileItemReader flatFileItemReader= new FlatFileItemReader();
+flatFileItemReader.setResouce(new FileSystemResource("src/main/respurce/users.csv"));
+flatFileItemReader.setLinestoSkip(1);//skip header part of table like id, name
+flatFileItemReader.setLineMapper(lineMapper());//match the order of lines
+retunrn flatFileItemReader;
+
+}
+
+@Bean
+public LineMapper<User> lineMapper(){
+	
+defaultLineMapper defaultLineMapper = new DefaultLineMapper();
+DelimitedLineTokenizer delimitedLineTokenizer = new DelimitedLineTokenizer ();
+delimitedLineTokenizer.setDelimetor(",");
+BeanWrapperFieldSetMapper beanWrapperFieldSetMapper = new BeanWrapperFieldSetMapper();
+beanWrapperFieldSetMapper .setTargetType(User.class);
+defaultLineMapper.setLineTokenizer(delimitedLineTokenizer);
+defaultLineMapper.setFieldSetMapper(beanWrapperFieldSetMapper);
+return defaultLineMapper;
+}
+
+1,samba,25,samba@gmail.com,101//take 1 value assign to table of id like name ,email based on comma(,)
+
+id name   age  email             department
+1  samba   25   samba@gmail.com   101
+
+}
+
+applicatio.properties
+-------------------
+database details
+-------
+spring.datasource.url=jdbc:h2:mem:testdm
+
+#temporory data storage
+spring.datasourc.url=jdbc:h2:mem:testdb
+
+#permanent data storage
+spring.datasourc.url=jdbc:h2:file:c:/data/sample
+spring.h2.console.enabled=true
+#
+
+in browser--http://localhost:8089/h2-console
+
+itemProessor
+-------------------
+public class Processor implemtns ItemProcess{
+
+Processor(){
+Map map = new HashMap<String,String>();
+map.put(101,"cse");
+
+map.put(102,"ece");
+}
+public User process(User user){ //predifined method
+String deptcode = user.getDeptCode();//1 samba 25 samba 101
+String dept = map.get(deptcode);//101 == cse
+user.setDept(dept);//1 samba 25 samba cse
+return user;
+}
+}
+
+itemWriter
+-----------
+
+public class DBWriter implemtns ItemWriter{
+
+@Autowired
+UserRepository repo;
+
+public void write(List<User> user){//unimplemented method
+
+repo.saveAll(user);//if want store one user use repo.sace(user);
+
+}
+}
+
+public interface UserRepository extends JpaRepository<User,Integer>{
+
+
+}
+
+
+//we access like this -->http://localhost:8089/springbatchoperation/load
+
+
+

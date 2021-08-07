@@ -1,0 +1,65 @@
+-----::::::::30/07/2021::::::::::------
+
+---SpringBootRest---
+------------------------
+--ReponseEntity---
+-----------
+--->@Id
+    @GeneratedValue(generator="increment")
+    private int employeeId;
+-----
+@GetMapping("/fetchData")
+public ResponseEntity<List<Employee>> fetchData(){
+
+List<Employee> employee = new ArrayList<Employee>();
+empService.fetchData().forEach(Employee::add);
+if(eployee.isEmpty()){
+return new ResponseEntity<>("insertion success"+HttpStatus.OK);
+}else{
+return new ResponseEntity<>(HttpStatus.CREATED);
+}
+}
+
+--:::::FEIN CLIENT:::::---
+------------------
+---->once service to other service communicate By RestTemplate
+--------------------------------
+-->if want json object then JSONOBject();
+--->feinclient is conncet with one service to another service
+--->restcontroller want to know about fineclient thats we autowired in rst controller
+ --> we want to set value jsonobject from another service
+--->so write annoation above interface where method we implement thrugh that only we can value
+--->
+---------
+TASK:::
+@Query @Modfying in spring data jpa
+
+-------------------------------------------------------
+-----------::::::::::::::02/08/2021::::::::::::::::::--------------------
+API Gate way::
+----------------
+zuul
+Google Apigee
+Spring Cloud Gateway
+
+
+spring.application.name=gateway-service
+spring.cloud.gateway.routes.id
+
+
+TASK::steps-->
+------
+-1)register eureka server
+-2)register with spring cloud api gate way but no enable zuul proxy annoation
+-3)product-service,order-service,invoice-service three services
+
+-javatechie,javainuse,techprimer sites to learn
+
+-->product-->order--->invoice
+http://localhost:8989/invoice/invoices/1109
+
+invoice_id:12333
+o_id:1109
+payment_status:paid
+total_amount:          order_id:1109     product     order 1109        invoice    1109
+                            100*5

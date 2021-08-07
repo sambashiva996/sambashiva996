@@ -1,0 +1,25 @@
+--->https://www.connect2java.com/tutorials/hibernate/clear-evict-and-close-methods-in-hibernate/
+--->http://websystique.com/springmvc/spring-4-mvc-helloworld-tutorial-annotation-javaconfig-full-example/
+--->https://www.java4s.com/spring/spring-aopaspect-oriented-programming-tutorials/
+--->https://www.tutorialspoint.com/java8/java8_periodduration.htm#:~:text=With%20Java%208%2C%20two%20specialized,time%20based%20amount%20of%20time.
+--->https://www.javatpoint.com/RowMapper-example
+--->https://www.java4s.com/spring-mvc/spring-mvc-execution-flow-diagram-spring-mvc-3-2-flow/
+--->http://download.eclipse.org/releases/oxygen/
+--->http://download.eclipse.org/technology/m2e/releases/
+--->https://mkyong.com/hibernate/hibernate-display-generated-sql-to-console-show_sql-format_sql-and-use_sql_comments/
+--->https://www.tutorialspoint.com/xml/xml_character_entities.htm
+--->http://websystique.com/springmvc/spring-4-mvc-helloworld-tutorial-annotation-javaconfig-full-example/
+--->https://www.javainuse.com/spring/SpringBoot_HelloWorld_gradle
+--->https://java2blog.com/spring-boot-hibernate-example/
+--->https://www.onlinetutorialspoint.com/hibernate/hql-update-delete-query-example.html
+--->https://howtodoinjava.com/spring-boot2/spring-boot-crud-hibernate/
+--->https://www.candidjava.com/spring-boot/jpa-example/
+--->https://grokonez.com/spring-framework-tutorial/spring-batch
+--->springbatch in tech primers
+--->https://howtodoinjava.com/spring-boot2/h2-database-example/
+--->https://www.javainuse.com/spring/spring_eurekaregister
+--->JWT --Java techie site to learn
+--->https://spring.io/projects/spring-cloud
+--->https://java2blog.com/spring-boot-profiles-example/
+--->https://zetcode.com/springboot/profile/
+--->https://www.springboottutorial.com/spring-boot-profiles
