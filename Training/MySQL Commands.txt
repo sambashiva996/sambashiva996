@@ -1,3 +1,6 @@
 MySQL DataBase Commands:::
 
 --->show databases
+--->use database;
+--->show tables;
+--->create database databasename
