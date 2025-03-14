@@ -40,8 +40,5 @@ public class Java8Programs {
         int[] array = IntStream.range(startIndex, lastIndex).map(index -> originalIntArray[index]).toArray();
         System.out.println(Arrays.toString(slicedResult));
 
-
-
-
     }
 }
