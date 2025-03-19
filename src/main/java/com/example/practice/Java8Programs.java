@@ -135,6 +135,14 @@ public class Java8Programs {
         /*using limit and skip print specified values from range*/
         List<Integer> collect = IntStream.rangeClosed(1, 6).boxed().skip(1).limit(4).collect(Collectors.toList());
         System.out.println(collect);
-/// /////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
+        /*convert String Array to character array*/
+        List<String> list = Arrays.asList("good", "morning");
+
+        char[] charArray = list.stream().collect(Collectors.joining()).toCharArray();
+
+        System.out.println(Arrays.toString(charArray));
+/////////////////////////////////////////////////////////////////////////////////////////
     }
 }
